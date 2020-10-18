@@ -17,14 +17,15 @@ defmodule ChronoxWeb.Router do
   scope "/auth", ChronoxWeb do
     pipe_through :browser
 
-    get "/google", AuthController, :request
     get "/google/callback", AuthController, :callback
+    get "/google/:availability_uuid", AuthController, :request
   end
 
   scope "/", ChronoxWeb do
     pipe_through :browser
 
     live "/", PageLive, :index
+    live "/availabilty/:uuid", AvailabilityLive, :index
   end
 
   # Other scopes may use custom stacks.

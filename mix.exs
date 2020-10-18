@@ -20,7 +20,7 @@ defmodule Chronox.MixProject do
   def application do
     [
       mod: {Chronox.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_google]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -47,8 +47,7 @@ defmodule Chronox.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ueberauth, "~> 0.6"},
-      {:ueberauth_google, "~> 0.9"}
+      {:httpoison, "~> 1.6"}
     ]
   end
 

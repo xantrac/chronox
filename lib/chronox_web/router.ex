@@ -14,6 +14,13 @@ defmodule ChronoxWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", ChronoxWeb do
+    pipe_through :browser
+
+    get "/google", AuthController, :request
+    get "/google/callback", AuthController, :callback
+  end
+
   scope "/", ChronoxWeb do
     pipe_through :browser
 

@@ -13,8 +13,8 @@ defmodule ChronoxWeb.PageLive do
     {:ok,
      assign(socket, %{
        users: users,
-       busy_time_from_api: %{duration: nil, slots: []},
-       busy_time_from_server: %{duration: nil, slots: []}
+       busy_time: [],
+       request_duration: nil
      })}
   end
 
@@ -29,7 +29,7 @@ defmodule ChronoxWeb.PageLive do
       end)
 
     {:noreply,
-     assign(socket, %{busy_time_from_server: %{duration: microseconds / 1000, slots: busy_time}})}
+     assign(socket, %{request_duration: microseconds / 1000, busy_time: busy_time})}
   end
 
   def handle_event("busy_time_from_api", _value, socket) do
@@ -40,6 +40,6 @@ defmodule ChronoxWeb.PageLive do
       end)
 
     {:noreply,
-     assign(socket, %{busy_time_from_api: %{duration: microseconds / 1000, slots: busy_time}})}
+      assign(socket, %{request_duration: microseconds / 1000, busy_time: busy_time})}
   end
 end

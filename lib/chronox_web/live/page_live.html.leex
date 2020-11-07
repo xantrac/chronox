@@ -1,46 +1,52 @@
-<a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="add_calendar" >
-  Add a Google calendar
-</a>
+<h1 class="text-3xl text-center text-purple-600">Busy Time Service</h1>
 
-<%= for user <- @users do %>
-  <div><%= user.email %></div>
-  <ul>
-    <%= for calendar <- user.calendars do %>
-      <li> <%= calendar %> </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= if @users != [] do %>
-  <a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="busy_time_from_api" >
-    Get busy time from api
-  </a>
-<% end %>
-
-<%= if @busy_time_from_api.slots != [] do %>
-  Duration: <%= @busy_time_from_api.duration %> ms
-  Busy time slots
-  <%= for %{"start" => start_time, "end" => end_time } <- @busy_time_from_api.slots do %>
+<div class="flex mt-6">
+  <div class="flex-1">
+    <button class="inline-flex justify-center w-64 rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" phx-click="add_calendar" >
+      Add a Google account
+    </button>
     <div>
-      <div><%= start_time %></div>
-      <div><%= end_time %></div>
+      <%= for user <- @users do %>
+        <div class="mt-2">
+          <span class="text-lg font-bold">Account: </span><span><%= user.email %></span>
+          <ul class="list-disc list-inside">
+            <%= for calendar <- user.calendars do %>
+              <li><%= calendar %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
-
-<%= if @users != [] do %>
-  <a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="busy_time_from_server" >
-    Get busy time from server
-  </a>
-<% end %>
-
-<%= if @busy_time_from_server.slots != [] do %>
-  Duration: <%= @busy_time_from_server.duration %> ms
-  Busy time slots
-  <%= for %{"start" => start_time, "end" => end_time } <- @busy_time_from_server.slots do %>
+  </div>
+  <div class="flex-1">
     <div>
-      <div><%= start_time %></div>
-      <div><%= end_time %></div>
+      <%= if @users != [] do %>
+        <button class="inline-flex justify-center w-64 rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" phx-click="busy_time_from_api" >
+          Get busy time from api
+        </button>
+
+        <button class="inline-flex justify-center w-64 rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" phx-click="busy_time_from_server" >
+          Get busy time from server
+        </button>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
+    <div class="mt-2">
+      <%= if @busy_time != [] do %>
+        <div>
+          <span class="text-lg font-bold">Duration: </span><%= @request_duration %> ms
+        <div>
+        <div>
+          <span class="text-lg font-bold">Busy time slots: </span>
+          <div>
+            <%= for %{"start" => start_time, "end" => end_time } <- @busy_time do %>
+              <div>
+                <div><%= start_time %></div>
+                <div><%= end_time %></div>
+              </div>
+            <% end %>
+          </div>
+        <div>
+      <% end %>
+    </div>
+  </div>
+</div>

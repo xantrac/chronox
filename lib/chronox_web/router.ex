@@ -17,8 +17,8 @@ defmodule ChronoxWeb.Router do
   scope "/auth", ChronoxWeb do
     pipe_through :browser
 
-    get "/google/callback", AuthController, :callback
-    get "/google/:availability_uuid", AuthController, :request
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 
   scope "/", ChronoxWeb do

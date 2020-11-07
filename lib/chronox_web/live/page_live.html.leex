@@ -1,4 +1,13 @@
-<a class="btn btn-primary btn-lg" phx-click="get_availability" >
+<a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="add_calendar" >
   <i class="fa fa-google"></i>
-  Check availability
+  Add a Google calendar
 </a>
+
+<%= for user <- @users do %>
+  <div><%= user.email %></div>
+  <ul>
+    <%= for calendar <- user.calendars do %>
+      <li> <%= calendar %> </li>
+    <% end %>
+  </ul>
+<% end %>

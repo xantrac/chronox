@@ -29,4 +29,11 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 
+config :ueberauth, Ueberauth,
+  providers: [
+    google:
+      {Ueberauth.Strategy.Google,
+       [default_scope: "email https://www.googleapis.com/auth/calendar"]}
+  ]
+
 import_config "#{Mix.env()}.exs"

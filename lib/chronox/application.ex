@@ -14,9 +14,10 @@ defmodule Chronox.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Chronox.PubSub},
       # Start the Endpoint (http/https)
-      ChronoxWeb.Endpoint
+      ChronoxWeb.Endpoint,
       # Start a worker by calling: Chronox.Worker.start_link(arg)
       # {Chronox.Worker, arg}
+      {Chronox.UserServer, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

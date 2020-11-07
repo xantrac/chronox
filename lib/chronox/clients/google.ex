@@ -1,8 +1,8 @@
 defmodule Chronox.Clients.Google do
   use HTTPoison.Base
 
-  def get_busy_time(email, start_time, end_time, token) do
-    post!(
+  def get_busy_time(id, start_time, end_time, token) do
+    %{body: body} = post!(
       "freeBusy",
       %{
         timeMin: start_time,
@@ -10,10 +10,11 @@ defmodule Chronox.Clients.Google do
         timeZone: "UTC",
         items: [
           %{
-            id: email
+            id: id
           }
         ]
-      },
+      }
+      |> Jason.encode!(),
       request_headers(token)
     )
   end

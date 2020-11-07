@@ -1,11 +1,11 @@
 defmodule ChronoxWeb.PageLive do
   use ChronoxWeb, :live_view
 
-  alias Chronox.UserServer
+  alias Chronox.AccountsServer
 
   def mount(_params, _session, socket) do
     users =
-      UserServer.get_users()
+      AccountsServer.get_accounts()
       |> Enum.map(fn {email, user_data} -> Map.put(user_data, :email, email) end)
 
     {:ok, assign(socket, %{users: users})}

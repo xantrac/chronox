@@ -1,5 +1,4 @@
 <a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="add_calendar" >
-  <i class="fa fa-google"></i>
   Add a Google calendar
 </a>
 
@@ -10,4 +9,38 @@
       <li> <%= calendar %> </li>
     <% end %>
   </ul>
+<% end %>
+
+<%= if @users != [] do %>
+  <a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="busy_time_from_api" >
+    Get busy time from api
+  </a>
+<% end %>
+
+<%= if @busy_time_from_api.slots != [] do %>
+  Duration: <%= @busy_time_from_api.duration %> ms
+  Busy time slots
+  <%= for %{"start" => start_time, "end" => end_time } <- @busy_time_from_api.slots do %>
+    <div>
+      <div><%= start_time %></div>
+      <div><%= end_time %></div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= if @users != [] do %>
+  <a class="btn btn-primary btn-lg" style="cursor:pointer" phx-click="busy_time_from_server" >
+    Get busy time from server
+  </a>
+<% end %>
+
+<%= if @busy_time_from_server.slots != [] do %>
+  Duration: <%= @busy_time_from_server.duration %> ms
+  Busy time slots
+  <%= for %{"start" => start_time, "end" => end_time } <- @busy_time_from_server.slots do %>
+    <div>
+      <div><%= start_time %></div>
+      <div><%= end_time %></div>
+    </div>
+  <% end %>
 <% end %>

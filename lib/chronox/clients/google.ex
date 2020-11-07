@@ -2,21 +2,24 @@ defmodule Chronox.Clients.Google do
   use HTTPoison.Base
 
   def get_busy_time(id, start_time, end_time, token) do
-    %{body: body} = post!(
-      "freeBusy",
-      %{
-        timeMin: start_time,
-        timeMax: end_time,
-        timeZone: "UTC",
-        items: [
-          %{
-            id: id
-          }
-        ]
-      }
-      |> Jason.encode!(),
-      request_headers(token)
-    )
+    %{body: %{"calendars" => %{^id => %{"busy" => busy}}}} =
+      post!(
+        "freeBusy",
+        %{
+          timeMin: start_time,
+          timeMax: end_time,
+          timeZone: "UTC",
+          items: [
+            %{
+              id: id
+            }
+          ]
+        }
+        |> Jason.encode!(),
+        request_headers(token)
+      )
+
+    busy
   end
 
   def get_calendars_list(token) do

@@ -17,7 +17,8 @@ defmodule Chronox.Application do
       ChronoxWeb.Endpoint,
       # Start a worker by calling: Chronox.Worker.start_link(arg)
       # {Chronox.Worker, arg}
-      {Chronox.AccountsServer, []}
+      {Chronox.AccountsServer, []},
+      {Chronox.BusyTimeServer, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

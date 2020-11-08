@@ -14,26 +14,4 @@ defmodule ChronoxWeb.AuthController do
 
     redirect(conn, to: "/")
   end
-
-  def callback(conn, stuff) do
-    IO.inspect(stuff, label: "STUFF")
-    # now = DateTime.utc_now() |> DateTime.to_iso8601()
-
-    # one_month_from_now =
-    #   DateTime.utc_now() |> DateTime.add(2_592_000, :seconds) |> DateTime.to_iso8601()
-
-    # %{
-    #   body: %{
-    #     "calendars" => %{
-    #       ^email => %{
-    #         "busy" => busy_time
-    #       }
-    #     }
-    #   }
-    # } = Calendar.get_busy_time(email, now, one_month_from_now, token)
-
-    # UserServer.set_busy_time(availability_uuid, email, busy_time)
-
-    redirect(conn, to: "/")
-  end
 end

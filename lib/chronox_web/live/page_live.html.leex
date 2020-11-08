@@ -28,24 +28,35 @@
         <button class="inline-flex justify-center w-64 rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" phx-click="busy_time_from_server" >
           Get busy time from server
         </button>
+
+        <div class="inline-block mx-2">
+          <%= if @real_time == "on" do %>
+            <input type="checkbox" class="mw-2" phx-click="toggle_real_time" checked>
+          <% else %>
+            <input type="checkbox" class="mw-2" phx-click="toggle_real_time">
+          <% end %>
+          <label for="vehicle1"> Real-time updates</label>
+        </div>
       <% end %>
     </div>
     <div class="mt-2">
       <%= if @busy_time != [] do %>
         <div>
           <span class="text-lg font-bold">Duration: </span><%= @request_duration %> ms
-        <div>
+        </div>
         <div>
           <span class="text-lg font-bold">Busy time slots: </span>
-          <div>
-            <%= for %{"start" => start_time, "end" => end_time } <- @busy_time do %>
-              <div>
-                <div><%= start_time %></div>
-                <div><%= end_time %></div>
+          <div class="flex flex-wrap">
+            <%= for {day, slots} <- @busy_time do %>
+              <div class="rounded-md border border-gray-300 m-1 p-1 bg-white shadow">
+                <div class="font-bold"><%= day %></div>
+                <%= for slot <- slots do %>
+                  <div><%= slot %></div>
+                <% end %>
               </div>
             <% end %>
           </div>
-        <div>
+        </div>
       <% end %>
     </div>
   </div>

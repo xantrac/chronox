@@ -3,6 +3,7 @@ defmodule Chronox.BusyTimeServer do
 
   alias Chronox.AccountsServer
   alias Chronox.BusyTime
+  alias Chronox.BusyTimeSubscription
 
   def start_link(_args) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -19,15 +20,17 @@ defmodule Chronox.BusyTimeServer do
   def handle_call(:get_busy_time, _from, busy_time) do
     {:reply, busy_time, busy_time}
   end
+
   def handle_continue(:schedule_busy_time_poller, busy_time) do
+    BusyTimeSubscription.broadcast_update_calendar()
     Process.send_after(self(), :poll_busy_time, 10000)
     {:noreply, busy_time}
   end
 
   def handle_info(:poll_busy_time, busy_time) do
-    polled_busy_time = 
-    AccountsServer.get_accounts()
-    |> BusyTime.get_for_accounts()
+    polled_busy_time =
+      AccountsServer.get_accounts()
+      |> BusyTime.get_for_accounts()
 
     {:noreply, polled_busy_time, {:continue, :schedule_busy_time_poller}}
   end

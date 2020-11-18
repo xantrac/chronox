@@ -12,13 +12,18 @@ defmodule ChronoxWeb.PageLive do
     users =
       AccountsServer.get_accounts()
       |> Enum.map(fn {email, user_data} -> Map.put(user_data, :email, email) end)
+    
+    calendars_number = 
+    users
+    |> Enum.reduce(0, fn user, acc -> acc + length(user.calendars) end)
 
     {:ok,
      assign(socket, %{
        users: users,
        busy_time: [],
        request_duration: nil,
-       real_time: nil
+       real_time: nil,
+       calendars_number: calendars_number
      })}
   end
 

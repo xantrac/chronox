@@ -8,7 +8,7 @@ defmodule Chronox.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Chronox.Repo,
+      # Chronox.Repo,
       # Start the Telemetry supervisor
       ChronoxWeb.Telemetry,
       # Start the PubSub system

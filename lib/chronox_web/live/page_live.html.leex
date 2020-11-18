@@ -5,6 +5,7 @@
     <button class="inline-flex justify-center w-64 rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" phx-click="add_calendar" >
       Add a Google account
     </button>
+    <div class="my-1"># Calendars <%= @calendars_number %></div>
     <div>
       <%= for user <- @users do %>
         <div class="mt-2">
